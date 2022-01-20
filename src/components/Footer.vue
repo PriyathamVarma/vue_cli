@@ -31,6 +31,6 @@ a {
   color: #42b983;
 }
 div{
-    margin-top:56vh;
+    margin-top:7vh;
 }
 </style>

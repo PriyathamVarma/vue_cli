@@ -4,7 +4,7 @@
 
     <Header msg = "Header"/>
    
-    <HelloWorld comp1="Add Products" comp2="Products List" comp3="Cart Details"/>
+    <HelloWorld comp1="Add Products" comp2="Products List" comp3="Cart Details " is-good= 1 />
 
     <Footer msg = "Footer"/>
 

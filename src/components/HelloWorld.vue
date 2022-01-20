@@ -1,32 +1,32 @@
 <template>
-  <div class="hello">
+  <div class="hello grab">
     <div class="container mt-5">
       
       <div class="row">
         <div class="col-sm-4">
-          <h3>{{comp1}}</h3><br/>
+          <h3>{{comp1}} {{ isGood === '1' ? 'Visible' : 'Not Visible' }}</h3><br/>
          
 
           <form v-on:submit.prevent="formSubmit" style="border:solid grey;padding:10px 20px">
     
                 <div class="mb-3 mt-3">
                   <label for="name">Name of the product:</label>
-                  <input type="name" class="form-control" id="name" placeholder="Enter product name" name="name">
+                  <input type="name" class="form-control" id="name" placeholder="Enter product name" name="name" required/>
                 </div>
     
                 <div class="mb-3">
                   <label for="numb">Quantity:</label>
-                  <input type="number" class="form-control" id="numb" placeholder="Enter Quantity" name="numb">
+                  <input type="number" class="form-control" id="numb" placeholder="Enter Quantity" name="numb" required/>
                 </div>
     
                 <div class="mb-3">
                     <label for="description">Description:</label>
-                    <input type="text" class="form-control" id="description" placeholder="Enter Description" name="description">
+                    <input type="text" class="form-control" id="description" placeholder="Enter Description" name="description" required/>
                   </div>
 
                   <div class="mb-3">
                     <label for="price">Price:</label>
-                    <input type="number" class="form-control" id="price" placeholder="Enter Price" name="price">
+                    <input type="number" class="form-control" id="price" placeholder="Enter Price" name="price" required/>
                   </div>
                 
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -38,7 +38,7 @@
     
             <ul><!-- product cards ---->
                 <div class="card" v-for="(items,index) in itmesList" :key="index">
-                    <div class="card-body">
+                    <div class="card-body" v-if="index!=0">
                         <h4 class="card-title"> {{items.name}} (£ {{items.price}} each)<span style="float:right;cursor:pointer" @click="delteItem(index)">	&#10006; </span> </h4>
                         <hr/>
                         <div class="row">
@@ -93,8 +93,8 @@ export default {
       dataInfo : "hai",
       cart : 0,
       itmesList :[
-                      {id:1, name:'product 1', description:'', qty : 0 , price : 2},
-                      {id:2, name:'product 2', description:'', qty : 0 , price : 2},
+                      {id:0, name:'test product', description:'', qty : 0 , price : 0},
+                      {id:2, name:'product 2',    description:'', qty : 0 , price : 21},
                   ],
 
       total: 0,
@@ -167,7 +167,9 @@ export default {
   props: {
     comp1: String,
     comp2: String,
-    comp3: String
+    comp3: String,
+    isGood : String,
+    
   }
 }
 </script>
@@ -188,4 +190,5 @@ li {
 a {
   color: #42b983;
 }
+.grab {cursor: -webkit-grab; cursor: grab;}
 </style>

@@ -1,6 +1,6 @@
 <template>
 <div class="container-fluid p-5 bg-warning text-white text-center">
-  <h1>My First Vue based E-commerce page</h1>
+  <h1>My First Vue based E-commerce {{msg}} page</h1>
   <p>Done using Vue CLI</p> 
 </div>
 </template>
