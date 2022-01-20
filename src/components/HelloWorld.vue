@@ -3,36 +3,16 @@
     <div class="container mt-5">
       
       <div class="row">
+
         <div class="col-sm-4">
-          <h3>{{comp1}} {{ isGood === '1' ? 'Visible' : 'Not Visible' }}</h3><br/>
+
+          <h3 >{{comp1}} {{ isGood === '1' ? 'Visible' : 'Not Visible' }}</h3><br/>
+          
          
-
-          <form v-on:submit.prevent="formSubmit" style="border:solid grey;padding:10px 20px">
-    
-                <div class="mb-3 mt-3">
-                  <label for="name">Name of the product:</label>
-                  <input type="name" class="form-control" id="name" placeholder="Enter product name" name="name" required/>
-                </div>
-    
-                <div class="mb-3">
-                  <label for="numb">Quantity:</label>
-                  <input type="number" class="form-control" id="numb" placeholder="Enter Quantity" name="numb" required/>
-                </div>
-    
-                <div class="mb-3">
-                    <label for="description">Description:</label>
-                    <input type="text" class="form-control" id="description" placeholder="Enter Description" name="description" required/>
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="price">Price:</label>
-                    <input type="number" class="form-control" id="price" placeholder="Enter Price" name="price" required/>
-                  </div>
-                
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
-
+          <Form v-on:props-change="formdata" :itmesListForProps="itmesList"/>    
+          
         </div>
+
         <div class="col-sm-4">
           <h3>{{comp2}}</h3><br/>
     
@@ -84,9 +64,18 @@
 </template>
 
 <script>
+
+import Form from './Form.vue'
 export default {
-  name: 'HelloWorld',
   
+  name: 'HelloWorld',
+
+  components:{
+    Form
+  },
+  
+
+
   data(){
 
     return{
@@ -94,8 +83,10 @@ export default {
       cart : 0,
       itmesList :[
                       {id:0, name:'test product', description:'', qty : 0 , price : 0},
-                      {id:2, name:'product 2',    description:'', qty : 0 , price : 21},
+                      {id:1, name:'product 2',    description:'', qty : 0 , price : 21},
                   ],
+
+      itmesListForProps : this.itmesList,            
 
       total: 0,
                
@@ -106,23 +97,7 @@ export default {
   //methods
   methods:{
 
-    //getting form values
-    formSubmit(event){
-      
-
-      let id = this.itmesList[this.itmesList.length-1].id + 1;
-      let name = event.target.elements.name.value;
-      let qty = parseFloat(event.target.elements.numb.value);
-      let description = event.target.elements.description.value;
-      let price = parseFloat(event.target.elements.price.value);
-
-      let insertedItem = {id: id, name:name, description:description, qty:qty, price:price};
-
-      this.itmesList.push(insertedItem);
-
-      console.log(this.itmesList);
-
-    },
+   //look for form.vue for form submit
 
     //deleting the list
     delteItem(index){
@@ -138,6 +113,9 @@ export default {
 
       this.total = this.total + this.itmesList[index].price;
 
+      //emit changes to parent component app
+      this.$emit('is-good-event',index);
+
     },
 
     decrementItem(index){
@@ -147,6 +125,18 @@ export default {
       this.total = this.total - this.itmesList[index].price;
 
     },
+
+    //catching the data from form.vue
+    formdata(data){
+
+      this.itmesList.push(data);
+      console.log("the data received to parent component");
+      console.log(data);
+
+      //props-change
+
+
+    }
 
 
   },
@@ -165,11 +155,35 @@ export default {
   //props
 
   props: {
-    comp1: String,
+
+    comp1:{
+      type: String,
+      required: true,
+      default: 'Add Products',
+      //use validator for validating
+      validator: function(value){
+        return value ;
+      }
+    },
     comp2: String,
     comp3: String,
     isGood : String,
-    
+  // String, Number, Boolean, Array, Object, date, Function are the other types available for props
+  },
+
+  // emits for parent components
+  emits:{
+    //use here instaed of inside methods
+    'is-good-event': function(id){
+
+      if (id){
+        return true;
+      }
+      else{
+        return false;
+      }
+
+    }
   }
 }
 </script>

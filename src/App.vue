@@ -3,8 +3,15 @@
 <div id="app">
 
     <Header msg = "Header"/>
+
    
-    <HelloWorld comp1="Add Products" comp2="Products List" comp3="Cart Details " is-good= 1 />
+    <HelloWorld 
+      comp1="Add Products"
+      comp2="Products List"
+      comp3="Cart Details "
+      is-good= "1"
+      v-on:is-good-event = 'changeGoodEvent'
+        />
 
     <Footer msg = "Footer"/>
 
@@ -20,9 +27,18 @@ import Footer from './components/Footer.vue'
 export default {
   name: 'App',
   components: {
+
     HelloWorld,
     Header,
-    Footer
+    Footer,
+    
+  },
+  //methods
+  methods:{
+    changeGoodEvent(value){
+      console.log('You entered emit function',value)//observe how this value which is index came from child component
+
+    }
   }
 }
 </script>
