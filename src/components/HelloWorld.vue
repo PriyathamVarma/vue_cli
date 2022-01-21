@@ -134,6 +134,7 @@ export default {
       console.log(data);
 
       //props-change
+      // the data is recieved from emits from Form component
 
 
     }
