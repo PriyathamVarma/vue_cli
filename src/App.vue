@@ -32,7 +32,14 @@ export default {
     HelloWorld,
     Header,
     Footer,
+ 
     
+  },
+  //provide
+  provide:{
+
+    name: "dataForChilds",
+
   },
   //data
   data(){

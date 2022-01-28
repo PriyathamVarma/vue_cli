@@ -1,6 +1,7 @@
 
 
 <template>
+{{name}}
     <form v-on:submit.prevent="formSubmit" style="border:solid grey;padding:10px 20px">
     
                 <div class="mb-3 mt-3">
@@ -41,6 +42,11 @@ export default {
     itmesListForProps : Array,
 
   },
+  //options API
+
+  inject:["name"],
+
+  //methods
 
   methods:{
 
