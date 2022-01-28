@@ -1,6 +1,6 @@
 <template>
-<div class="container-fluid p-5 bg-warning text-white text-center mb-0">
-  <h1>Footer Component</h1>
+<div class="container-fluid p-5 bg-warning text-white text-center mb-0" v-if="displayToFooter">
+  <h1>Footer Component {{displayToFooter}}</h1>
 </div>
 </template>
 
@@ -8,7 +8,8 @@
 export default {
   name: 'Footer',
     props: {
-      msg: String
+      msg: String,
+      displayToFooter : Boolean,
       }
 
 }

@@ -2,6 +2,7 @@
 <div class="container-fluid p-5 bg-warning text-white text-center">
   <h1>My First Vue based E-commerce {{msg}} page</h1>
   <p>Done using Vue CLI</p> 
+  <button class="btn btn-dark" v-on:click="dataFromHeader">Click</button>
 </div>
 </template>
 
@@ -10,6 +11,19 @@ export default {
   name: 'Header',
   props: {
       msg: String
+      },
+      //data
+      data(){
+        return{
+          display: false,
+        }
+      },
+      //methods
+      methods:{
+        dataFromHeader(){
+          this.display = !this.display;
+          this.$emit('dataComingFromHeader',this.display);
+        }
       }
 
 }

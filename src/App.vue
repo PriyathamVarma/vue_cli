@@ -2,7 +2,7 @@
 
 <div id="app">
 
-    <Header msg = "Header"/>
+    <Header v-on:dataComingFromHeader="triggerWhenDataArrivedFromHeader" msg = "Header" />
 
    
     <HelloWorld 
@@ -13,7 +13,7 @@
       v-on:is-good-event = 'changeGoodEvent'
         />
 
-    <Footer msg = "Footer"/>
+    <Footer msg = "Footer" v-bind:displayToFooter="display"/>
 
 </div>
 
@@ -26,6 +26,7 @@ import Footer from './components/Footer.vue'
 
 export default {
   name: 'App',
+  emits:['dataComingFromHeader'],
   components: {
 
     HelloWorld,
@@ -33,11 +34,22 @@ export default {
     Footer,
     
   },
+  //data
+  data(){
+    return{
+      display : '',
+    }
+  },
   //methods
   methods:{
     changeGoodEvent(value){
       console.log('You entered emit function',value)//observe how this value which is index came from child component
 
+    },
+    triggerWhenDataArrivedFromHeader(data){
+      console.log(data);
+      this.display = data;
+      console.log('the display from app.vue',this.display);
     }
   }
 }
